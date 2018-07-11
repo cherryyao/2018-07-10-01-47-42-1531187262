@@ -6,23 +6,53 @@ import java.util.List;
 
 public class Add {
     public int getSumOfEvens(int leftBorder, int rightBorder) {
-        throw new NotImplementedException();
+        int sum =0;
+        if(leftBorder >rightBorder){
+            for(int i=rightBorder;i<=leftBorder;i++){
+                if(i%2==0){
+                    sum += i;
+                }
+            }
+        }
+        if(leftBorder<rightBorder){
+            for (int i = leftBorder;i<=rightBorder;i++){
+                if(i%2==0){
+                    sum += i;
+                }
+            }
+        }
+        return sum;
     }
 
     public int getSumOfOdds(int leftBorder, int rightBorder) {
-        throw new NotImplementedException();
+        int sum =0;
+        if(leftBorder >rightBorder){
+            for(int i=rightBorder;i<=leftBorder;i++){
+                if(i%2!=0){
+                    sum += i;
+                }
+            }
+        }
+        if(leftBorder<rightBorder){
+            for (int i = leftBorder;i<=rightBorder;i++){
+                if(i%2!=0){
+                    sum += i;
+                }
+            }
+        }
+        return sum;
     }
 
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        return arrayList.stream().reduce(0,(sum,x)->sum+(x*3+2));
     }
 
     public List<Integer> getTripleOfOddAndAddTwo(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        return  arrayList.stream().map(x -> x%2==1 ? x*3+2 : x).collect(Collectors.toList());
     }
 
     public int getSumOfProcessedOdds(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        return  arrayList.stream().filter(x->x%2==1).reduce(0,(sum,x) -> sum+(x*3+5));
     }
 
     public double getMedianOfEven(List<Integer> arrayList) {
