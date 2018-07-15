@@ -4,6 +4,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 public class Reduce {
 
@@ -18,39 +19,57 @@ public class Reduce {
     }
 
     public double getMinimum() {
-        throw new NotImplementedException();
+        return arrayList.stream().reduce(Integer::min).get();
         //return arrayList.stream().reduce((a,b)->a<b?a:b);
     }
 
     public double getAverage() {
-        throw new NotImplementedException();
+        return arrayList.stream().mapToDouble(num -> num).average().getAsDouble();
     }
 
     public double getOrderedMedian() {
-        throw new NotImplementedException();
+        int index = arrayList.size() / 2;
+        if (index % 2 == 0) {
+            return arrayList.stream().skip(index - 1).limit(2).mapToInt(num -> num).average().getAsDouble();
+        } else {
+            return arrayList.stream().skip(index).findFirst().get();
+        }
     }
 
     public int getFirstEven() {
-        throw new NotImplementedException();
+        return arrayList.stream().filter(num -> num % 2 == 0).findFirst().get();
     }
 
     public int getIndexOfFirstEven() {
-        throw new NotImplementedException();
+        int firstEvent = arrayList.stream().filter(num -> num % 2 == 0).findFirst().get();
+        return arrayList.indexOf(firstEvent);
     }
 
     public boolean isEqual(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        Boolean isEqual = false;
+        if (arrayList.size() == arrayList.size()) {
+            isEqual = IntStream.range(0, arrayList.size())
+                    .allMatch(index -> arrayList.get(index) == arrayList.get(index));
+        }
+        return isEqual;
     }
 
-    public Double getMedianInLinkList(SingleLink singleLink) {
-        throw new NotImplementedException();
+    public double getMedianInLinkList(SingleLink<Integer> singleLink) {
+
+        int index = arrayList.size() / 2;
+
+        if (arrayList.size() % 2 == 0) {
+            return (singleLink.getNode(index) + singleLink.getNode(index + 1)) / 2.0;
+        } else {
+            return singleLink.getNode(index + 1);
+        }
     }
 
     public int getLastOdd() {
-        throw new NotImplementedException();
+        return arrayList.stream().filter(num -> num % 2 != 0).reduce((first, second) -> second).get();
     }
 
     public int getIndexOfLastOdd() {
-        throw new NotImplementedException();
+        return arrayList.lastIndexOf(getLastOdd());
     }
 }
