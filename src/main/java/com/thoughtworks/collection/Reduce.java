@@ -45,11 +45,11 @@ public class Reduce {
         return arrayList.indexOf(firstEvent);
     }
 
-    public boolean isEqual(List<Integer> arrayList) {
+    public boolean isEqual(List<Integer> objectList) {
         Boolean isEqual = false;
-        if (arrayList.size() == arrayList.size()) {
+        if (objectList.size() == arrayList.size()) {
             isEqual = IntStream.range(0, arrayList.size())
-                    .allMatch(index -> arrayList.get(index) == arrayList.get(index));
+                    .allMatch(index -> arrayList.get(index) == objectList.get(index));
         }
         return isEqual;
     }
